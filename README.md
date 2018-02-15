@@ -1,2 +1,0 @@
-# tareas
-Tareas de arqui
