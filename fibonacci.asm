@@ -3,7 +3,8 @@
 .text
 
 	addi $a0, $zero, 6	# this is n
-	#addi $a1, $zero, 1	#this is used as a flag to see if n-1 or n-2
+	#add $a1, $zero, 2	#this is used as a flag to see if base case has ended
+	#add $v0, $zero, $zero
 		
 	jal fibonacci
 	j end
@@ -14,15 +15,19 @@ fibonacci:
 	sw $s0, 4($sp)		#save s0 on stack this is like a flag
 	sw $s1, 8($sp)		#save s1 on stack this will be used for operation n-1
 	#sw $s2, 12($sp)
-   
+   	
+   	beq $a1, 
 	slti $s0, $a0, 1  	#if n < 1 save 0. 
 	beq $s0, $zero, recursividad
 	#beq $s0, $a1, recursividad2
-	addi $v0, $zero, 0 		#init v0 with 0
+	add $v0, $zero,  		#init v0 with 0
 	j exitfibonacci
+
+#recursividadbase:
 	
+			
 recursividad:
-	add $s1, $zero, $a0	#add n to $s0
+	add $s1, $zero, $zero	#add n to $s0
 	addi $a0, $a0, -1	#decrease n by one
 	jal fibonacci
 	add $v0, $s1, $v0
