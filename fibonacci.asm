@@ -15,9 +15,10 @@ fibonacci:
 	sw $s1, 8($sp)		#save s1 on stack this will be used for operation n-1
 	#sw $s2, 12($sp)
    
-	slti $s0, $a0, 2	#if n < 2 save 0. 
+	slti $s0, $a0, 	#if n < 2 save 0. 
 	beq $s0, $zero, recursividad
-	addi $v0, $zero, 1 		#init v0 with 
+	beq $s0, $a1, recursividad2
+	addi $v0, $zero, 0 		#init v0 with 0
 	j exitfibonacci
 	
 recursividad:
@@ -26,6 +27,11 @@ recursividad:
 	jal factorial
 	add $v0, $s1, $v0
 			
+recursividad2:
+	add $s1, $zero, $a0	#add n to $s0
+	addi $a0, $a0, -1	#decrease n by one
+	jal factorial
+	add $v0, $s1, $v0
 
 exitfibonacci:
 	lw $ra, 0($sp)		# load $ra from stack
